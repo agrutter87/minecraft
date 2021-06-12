@@ -22,11 +22,14 @@ import math
 #   origin:         The origin point, if absolute. Otherwise, the origin point will be the player running the command
 ########################################################################################################################
 def create_from_stl_at_directions(stl_path, stl_file, function_path, function, num_directions, voxel_interval, center,
-                                  origin=None):
+                                  origin=None, block_type="quartz_block", block_data=0):
     DIRECTIONS = ["north", "south", "east", "west"]
     # Loop over some number of *.mcfunction files to output
     for direction in range(num_directions):
-        function_name = f'{function}_{DIRECTIONS[direction]}'
+        if num_directions == 1:
+            function_name = f'{function}'
+        else:
+            function_name = f'{function}_{DIRECTIONS[direction]}'
 
         # For each file, create a filename with one of the four directions
         filename = function_path + fr'\{function_name}'
@@ -36,7 +39,7 @@ def create_from_stl_at_directions(stl_path, stl_file, function_path, function, n
 
         # Convert the *.stl file to a *.mcfunction file
         convert_stl_to_minecraft_function(stl_path, stl_file, filename, function_name,
-                                          rotation, voxel_interval, center, origin)
+                                          rotation, voxel_interval, center, origin, block_type, block_data)
 
 
 ########################################################################################################################

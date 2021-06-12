@@ -22,7 +22,7 @@ MAX_FILE_LINES = 9999
 #   origin:         The origin point, if absolute. Otherwise, the origin point will be the player running the command
 ########################################################################################################################
 def convert_stl_to_minecraft_function(stl_path, stl_file, filename, function_name, rotate=0, interval=1,
-                                      center=[False, False, False], origin=None):
+                                      center=[False, False, False], origin=None, block_type="quartz_block", block_data=0):
     print('Getting the mesh from the STL file...', end='')
     mesh = trimesh.load_mesh(fr"{stl_path}\{stl_file}", Process=False)
     print("complete")
@@ -129,7 +129,7 @@ def convert_stl_to_minecraft_function(stl_path, stl_file, filename, function_nam
                 fill(file,
                      [x, y, z],
                      [x, y, z],
-                     "quartz_block", 0,
+                     block_type, block_data,
                      start_coords=["rel", "rel", "rel"], end_coords=["rel", "rel", "rel"])
             else:
                 # ...otherwise shift the coodinates to their provided origin
